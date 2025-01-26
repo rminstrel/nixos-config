@@ -145,18 +145,19 @@
       packages = with pkgs; [
 		thunderbird
         fastfetch
-        # steam
-		# adwsteamgtk
+        steam
+        steam-run
+		adwsteamgtk
         # lutris-unwrapped
-        # gamescope
-        # mangohud
+        gamescope
+        mangohud
         libreoffice-fresh
         discord
-        # obs-studio
-        # kdePackages.kdenlive
-        # audacity
-        # gimp-with-plugins
-        # inkscape-with-extensions
+        obs-studio
+        kdePackages.kdenlive
+        audacity
+        gimp-with-plugins
+        inkscape-with-extensions
         ollama
 		alpaca
         distrobox
@@ -214,8 +215,8 @@
     links2
     wl-clipboard
     wl-clipboard-x11
-    # wineWowPackages.waylandFull
-    # winetricks
+    wineWowPackages.waylandFull
+    winetricks
     kanata-with-cmd
     # libsForQt5.qt5ct
     kdePackages.qt6ct
