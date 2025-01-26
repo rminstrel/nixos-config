@@ -173,7 +173,7 @@
     # also pass inputs to home-manager modules
     extraSpecialArgs = {inherit inputs;};
     users = {
-      "rminstrel" = import ./home.nix;
+      "rminstrel" = import ./home-manager/home.nix;
     };
   };
 
