@@ -148,7 +148,7 @@
         steam
         steam-run
 		adwsteamgtk
-        # lutris-unwrapped
+        lutris-unwrapped
         gamescope
         mangohud
         libreoffice-fresh
@@ -165,7 +165,7 @@
         vlc
         rhythmbox
         qbittorrent
-        code-cursor
+        codium
     ];
   };
 
@@ -218,7 +218,6 @@
     wineWowPackages.waylandFull
     winetricks
     kanata-with-cmd
-    # libsForQt5.qt5ct
     kdePackages.qt6ct
     adwaita-qt
     adwaita-qt6
