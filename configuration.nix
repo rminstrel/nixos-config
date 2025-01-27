@@ -143,24 +143,23 @@
       description = "Alif Al Amin";
       extraGroups = [ "networkmanager" "wheel" "podman" ];
       packages = with pkgs; [
-		thunderbird
+	    	thunderbird
         fastfetch
         steam
         steam-run
-		adwsteamgtk
+	    	adwsteamgtk
         lutris-unwrapped
         gamescope
         mangohud
         libreoffice-fresh
         discord
         obs-studio
-        kdePackages.kdenlive
+        davinci-resolve
         audacity
         gimp-with-plugins
         inkscape-with-extensions
         ollama
-		alpaca
-        distrobox
+        alpaca
         shotwell
         vlc
         rhythmbox
@@ -181,22 +180,22 @@
   # getty autologin for rminstrel
   services.getty.autologinUser = "rminstrel";
 
-  # Enable common container config files in /etc/containers
-  virtualisation.containers.enable = true;
+  # Enable podman for containers
   virtualisation = {
-  podman = {
+    containers.enable = true;
+    podman = {
       enable = true;
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
       dockerCompat = true;
-      # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
     };
   };
 
   # Install and configure flatpak
   services.flatpak.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  xdg.portal.config.common.default = "gtk";
+  xdg.portal = {
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "gtk";
+  };
   
   # Install firefox.
   programs.firefox.enable = true;
@@ -227,7 +226,6 @@
   ];
 
   # Some kernel shenanigans
-  boot.kernelModules = [ "fuse" "kvm-intel" "coretemp" "i915" ];
   boot.kernelParams = [ "rw" "rootfstype=ext4" "loglevel=7" "debug" "pcie_aspm=off" "pci=noaer" "mitigations=off" "sysrq_always_enabled=1" "i915.modeset=1" ];
   
   # Fix that damn lid on HP laptops
@@ -249,11 +247,6 @@
     substituters = [ "https://aseipp-nix-cache.global.ssl.fastly.net" "https://nix-community.cachix.org" "https://mirror.sjtu.edu.cn/nix-channels/store" ];
     trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
   };
-
-  # Auto-upgrade the system when necessary
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
-  system.autoUpgrade.channel = "https://channels.nixos.org/nixos-24.11";
     
   # OpenGL shenanigans
   hardware.graphics = {
@@ -269,10 +262,10 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
