@@ -165,7 +165,7 @@
         vlc
         rhythmbox
         qbittorrent
-        codium
+        vscodium
     ];
   };
 
