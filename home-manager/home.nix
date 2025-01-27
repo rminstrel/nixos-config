@@ -18,7 +18,14 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-	nerdfonts
+	nerd-fonts.caskaydia-cove
+  nerd-fonts.iosevka-term
+  nerd-fonts.jetbrains-mono
+  nerd-fonts.fira-code
+  nerd-fonts.monaspace
+  nerd-fonts.mononoki
+  nerd-fonts.sauce-code-pro
+  nerd-fonts.liberation
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
