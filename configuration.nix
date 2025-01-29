@@ -8,8 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./flatpak.nix
-      inputs.home-manager.nixosModules.default
+      inputs.home-manager.nixosModules.default   
     ];
 
   # Bootloader.
@@ -43,38 +42,54 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Set the environment variables 
+  # Set the environment variables
   environment.sessionVariables = {
   EDITOR = "micro";
-  # QT_QPA_PLATFORMTHEME = "qt6ct";
   };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  # Enable Hyprland for MASSIVE showoff
+  # You know what else is massive?
+  # GET OUT!-
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+  };
+  programs.waybar.enable = true;
+
+  # Enable SDDM for Hyprland and other misc. window Managers and DEs
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
+  
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  environment.gnome.excludePackages = with pkgs; [
-    gnome-contacts
-    gnome-weather
-    gnome-maps
-    gnome-clocks
-    gnome-text-editor
-    gnome-tour
-    gnome-music
-    gnome-calendar
-    gnome-console
-    gnome-calculator
-    gnome-logs
-    gnome-connections
-    geary
-    loupe
-    totem
-    seahorse
-    epiphany
-  ];
-  programs.gnome-terminal.enable = false;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+  # environment.gnome.excludePackages = with pkgs; [
+  #   gnome-contacts
+  #   gnome-weather
+  #   gnome-maps
+  #   gnome-clocks
+  #   gnome-text-editor
+  #   gnome-tour
+  #   gnome-music
+  #   gnome-calendar
+  #   gnome-console
+  #   gnome-calculator
+  #   gnome-logs
+  #   gnome-connections
+  #   gnome-software
+  #   geary
+  #   loupe
+  #   evince
+  #   totem
+  #   seahorse
+  #   epiphany
+  # ];
+  # programs.gnome-terminal.enable = false;
 
   # Set Qt styling
   qt = {
@@ -151,10 +166,13 @@
         lutris-unwrapped
         gamescope
         mangohud
+        # inputs.legacylauncher.packages.${pkgs.system}.legacylauncher
         libreoffice-fresh
+        papers
+        iotas
         discord
         obs-studio
-        davinci-resolve
+        kdePackages.kdenlive
         audacity
         gimp-with-plugins
         inkscape-with-extensions
@@ -168,6 +186,19 @@
     ];
   };
 
+  # Configure which fonts to install
+  fonts.packages = with pkgs; [
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.iosevka-term
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.fira-code
+    nerd-fonts.monaspace
+    nerd-fonts.mononoki
+    nerd-fonts.sauce-code-pro
+    nerd-fonts.liberation
+  ];
+  
   # Install home-manager for declaring home configurations
   home-manager = {
     # also pass inputs to home-manager modules
@@ -179,6 +210,9 @@
 
   # getty autologin for rminstrel
   services.getty.autologinUser = "rminstrel";
+
+  # Disable password for sudo (I'm tired of inputting passwords on my own damn computer)
+  security.sudo.wheelNeedsPassword = false;
 
   # Enable podman for containers
   virtualisation = {
@@ -193,10 +227,13 @@
   # Install and configure flatpak
   services.flatpak.enable = true;
   xdg.portal = {
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs; [ 
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
+  ];
     config.common.default = "gtk";
   };
-  
+
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -208,6 +245,15 @@
   environment.systemPackages = with pkgs; [
     micro
     neovim
+    rofi-wayland
+    wlogout
+    kitty
+    dunst
+    libnotify
+    networkmanagerapplet
+    swww
+    grim
+    slurp
     wget
     curl
     git
@@ -216,18 +262,20 @@
     wl-clipboard-x11
     wineWowPackages.waylandFull
     winetricks
+    jre8
     kanata-with-cmd
     kdePackages.qt6ct
     adwaita-qt
     adwaita-qt6
-    dconf-editor
+    # dconf-editor
+    # gnome-tweaks
     tilix
     pods
   ];
 
   # Some kernel shenanigans
-  boot.kernelParams = [ "rw" "rootfstype=ext4" "loglevel=7" "debug" "pcie_aspm=off" "pci=noaer" "mitigations=off" "sysrq_always_enabled=1" "i915.modeset=1" ];
-  
+  boot.kernelParams = [ "rw" "rootfstype=ext4" "loglevel=7" "debug" "pcie_aspm=off" "pci=noaer" "mitigations=off" "sysrq_always_enabled=1" ];
+
   # Fix that damn lid on HP laptops
   systemd.services.hp-keycodes = {
     description = "HP setkeycodes fix";
@@ -238,7 +286,7 @@
     };
     wantedBy = [ "rescue.target" "multi-user.target" "graphical.target" ];
   };
-  
+
   # Some nix settings to improve performance and build times
   nix.settings = {
     auto-optimise-store = true;
@@ -247,7 +295,7 @@
     substituters = [ "https://aseipp-nix-cache.global.ssl.fastly.net" "https://nix-community.cachix.org" "https://mirror.sjtu.edu.cn/nix-channels/store" ];
     trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
   };
-    
+
   # OpenGL shenanigans
   hardware.graphics = {
     enable = true;
@@ -255,7 +303,7 @@
     extraPackages = with pkgs; [ intel-media-driver intel-compute-runtime vulkan-tools aha pciutils wayland-utils glxinfo egl-wayland ];
     # extraPackages32 = with pkgs; [ intel-media-driver intel-compute-runtime vulkan-tools aha pciutils wayland-utils glxinfo egl-wayland ];
   };
-  
+
   # Remove nano because it sucks balls
   programs.nano.enable = false;
 
