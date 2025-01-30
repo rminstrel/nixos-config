@@ -163,7 +163,7 @@
         lutris-unwrapped
         gamescope
         mangohud
-        # inputs.legacylauncher.packages.${pkgs.system}.legacylauncher
+        inputs.legacylauncher.packages.${pkgs.system}.legacylauncher
         libreoffice-fresh
         papers
         iotas
