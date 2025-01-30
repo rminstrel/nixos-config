@@ -69,7 +69,7 @@
 
       exec-once = [
         "nm-applet &"
-        "waybar & hyprpaper & dunst"
+        "hyprpaper & dunst"
       ];
 
       env = [
