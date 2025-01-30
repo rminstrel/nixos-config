@@ -16,15 +16,16 @@
     # Community packages; used for Firefox extensions
     nur.url = "github:nix-community/nur";
 
-    # Add Hyprland flake for Hyprland
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, legacylauncher, ... }@inputs: {
+  outputs = { 
+    self,
+    nixpkgs, 
+    home-manager, 
+    nur, 
+    legacylauncher, 
+    ... 
+    }@inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };

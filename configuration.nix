@@ -53,10 +53,7 @@
   # Enable Hyprland for MASSIVE showoff
   # You know what else is massive?
   # GET OUT!-
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-  };
+  programs.hyprland.enable = true;
   programs.waybar.enable = true;
 
   # Enable SDDM for Hyprland and other misc. window Managers and DEs
