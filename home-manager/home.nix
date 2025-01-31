@@ -165,6 +165,7 @@
         "$mainMod, A, exec, $menu"
         "$mainMod, P, pseudo,"
         "$mainMod, G, togglesplit,"
+        "$mainMod, F11, fullscreen"
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
         "$mainMod, up, movefocus, u"
@@ -220,6 +221,28 @@
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       ];
+    };
+  };
+
+  gtk = {
+    enable = true;
+    font = {
+      name = "Cantarell";
+      size = 11;
+    };
+    iconTheme.name = "Tela-circle-dark";
+    theme.name = "Adwaita-dark";
+    cursorTheme = {
+      name = "Bibata-Modern-Ice";
+      size = 24;
+    };
+  };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [ "/home/rminstrel/Pictures/wallpapers/earth-from-moon.jpg" ];
+      wallpapaer = [ "eDP-1,/home/rminstrel/Pictures/wallpapers/earth-from-moon.jpg" ];
     };
   };
 

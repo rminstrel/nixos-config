@@ -92,7 +92,7 @@
   qt = {
     enable = true;
     style = "adwaita-dark";
-    platformTheme = "gnome";
+    platformTheme = "qt5ct";
   };
 
   # Configure keymap in X11
@@ -197,6 +197,7 @@
   ];
   
   # Install home-manager for declaring home configurations
+  programs.home-manager.enable = true;
   home-manager = {
     # also pass inputs to home-manager modules
     extraSpecialArgs = {inherit inputs;};
@@ -247,7 +248,7 @@
     dunst
     libnotify
     networkmanagerapplet
-    swww
+    hyprpaper
     grim
     slurp
     wget
@@ -261,6 +262,7 @@
     jre8
     kanata-with-cmd
     kdePackages.qt6ct
+    kdePackages.dolphin
     adwaita-qt
     adwaita-qt6
     # dconf-editor
