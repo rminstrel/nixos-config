@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "rminstrel";
-  home.homeDirectory = "/home/rminstrel";
+  home.username = "lifium";
+  home.homeDirectory = "/home/lifium";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -50,7 +50,7 @@
   #
   # or
   #
-  #  /etc/profiles/per-user/rminstrel/etc/profile.d/hm-session-vars.sh
+  #  /etc/profiles/per-user/lifium/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
@@ -65,7 +65,7 @@
 
       "$terminal" = "kitty";
       "$fileManager" = "dolphin";
-      "$menu" = "rofi -show drun";
+      "$menu" = "wofi --show drun";
 
       exec-once = [
         "nm-applet &"
@@ -78,30 +78,30 @@
       ];
 
       general = {
-        gaps_in = 4;
-        gaps_out = 8;
-        border_size = 2;
-        "col.active_border" = "rgb(88c0d0) rgb(81a1c1) 45deg";
-        "col.inactive_border" = "rgb(3b4252)";
+        gaps_in = 0;
+        gaps_out = 0;
+        border_size = 4;
+        "col.active_border" = "rgba(4385beff) rgba(3aa99fee) 45deg";
+        "col.inactive_border" = "rgba(205ea6aa) rgba(24837b99) 45deg";
         resize_on_border = false;
         allow_tearing = false;
         layout = "dwindle";
       };
 
       decoration = {
-        rounding = 4;
+        rounding = 0;
         active_opacity = 1.0;
         inactive_opacity = 1.0;
         shadow = {
           enabled = true;
           range = 5;
           render_power = 4;
-          color = "rgba(282828ee)";
+          color = "rgba(1a1a1aee)";
         };
         blur = {
           enabled = true;
-          size = 5;
-          passes = 2;
+          size = 10;
+          passes = 3;
           vibrancy = 0.2;
         };
       };
@@ -109,14 +109,16 @@
       animations = {
         enabled = true;
         bezier = [
-          "easeOutQuint,0.25,1,0.3,1"
-          "easeInOutCubic,0.6,0.05,0.4,1"
-          "linear,0,0,1,1"
-          "almostLinear,0.5,0.5,0.75,1.0"
-          "quick,0.15,0,0.1,1"
+    		"easeOutExpo,0.19,1,0.22,1"
+   			"easeInOutCubic,0.65,0.05,0.36,1"
+    		"linear,0,0,1,1"
+    		"almostLinear,0.5,0.5,0.75,1.0"
+    		"quick,0.15,0,0.1,1"
+    		"gentlePop,0.34,1.56,0.64,1"
+    		"smoothSlide,0.25,1,0.3,1"
         ];
         animation = [
-          "global, 1, 10, default"
+          "global, 1, 8, default"
           "border, 1, 5.5, easeOutQuint"
           "windows, 1, 5, easeOutQuint"
           "windowsIn, 1, 4, easeOutQuint, popin 87%"
@@ -164,7 +166,7 @@
         "$mainMod, V, togglefloating,"
         "$mainMod, A, exec, $menu"
         "$mainMod, P, pseudo,"
-        "$mainMod, G, togglesplit,"
+        "$mainMod, J, togglesplit,"
         "$mainMod, F11, fullscreen"
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
@@ -194,6 +196,9 @@
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
+        ", Print, exec, hyprshot -m region -o ~/Pictures/Screenshots -z"
+        "Shift, Print, exec, hyprshot -m output -o ~/Pictures/Screenshots -z"
+        "Alt, Print, exec, hyprshot -m window -o ~/Pictures/Screenshots -z"
       ];
 
       bindm = [
@@ -230,7 +235,7 @@
       name = "Cantarell";
       size = 11;
     };
-    iconTheme.name = "Tela-circle-dark";
+    iconTheme.name = "ePapirus-dark";
     theme.name = "Adwaita-dark";
     cursorTheme = {
       name = "Bibata-Modern-Ice";
@@ -240,10 +245,10 @@
 
   services.hyprpaper = {
     enable = true;
-    settings = {
-      preload = [ "/home/rminstrel/Pictures/wallpapers/earth-from-moon.jpg" ];
-      wallpapaer = [ "eDP-1,/home/rminstrel/Pictures/wallpapers/earth-from-moon.jpg" ];
-    };
+    extraConfig = { ''
+    preload = /home/lifium/Pictures/wallpapers/wallhaven3.jpg
+    wallpaper = eDP-1, /home/lifium/Pictures/wallpapers/wallhaven3.jpg
+    '' };
   };
 
   # Let Home Manager install and manage itself.

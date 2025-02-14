@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./flatpak.nix
       inputs.home-manager.nixosModules.default   
     ];
 
@@ -150,22 +151,22 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.rminstrel = {
+    users.users.lifium = {
       isNormalUser = true;
       description = "Alif Al Amin";
       extraGroups = [ "networkmanager" "wheel" "podman" ];
       packages = with pkgs; [
-	    	thunderbird
-        fastfetch
-        steam
-        steam-run
-	    	adwsteamgtk
-        lutris-unwrapped
-        gamescope
-        mangohud
-        inputs.legacylauncher.packages.${pkgs.system}.legacylauncher
-        libreoffice-fresh
-        papers
+		thunderbird
+		fastfetch
+		steam
+		steam-run
+		adwsteamgtk
+		lutris-unwrapped
+		gamescope
+		mangohud
+        # inputs.legacylauncher.packages.${pkgs.system}.legacylauncher
+		libreoffice-fresh
+		evince
         iotas
         discord
         obs-studio
@@ -202,12 +203,12 @@
     # also pass inputs to home-manager modules
     extraSpecialArgs = {inherit inputs;};
     users = {
-      "rminstrel" = import ./home-manager/home.nix;
+      "lifium" = import ./home-manager/home.nix;
     };
   };
 
-  # getty autologin for rminstrel
-  services.getty.autologinUser = "rminstrel";
+  # getty autologin for lifium
+  services.getty.autologinUser = "lifium";
 
   # Disable password for sudo (I'm tired of inputting passwords on my own damn computer)
   security.sudo.wheelNeedsPassword = false;
@@ -226,9 +227,9 @@
   services.flatpak.enable = true;
   xdg.portal = {
     extraPortals = with pkgs; [ 
-      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gnome
   ];
-    config.common.default = "hyprland";
+    config.common.default = "gnome";
   };
 
   # Install firefox.
@@ -242,7 +243,7 @@
   environment.systemPackages = with pkgs; [
     micro
     neovim
-    rofi-wayland
+    wofi
     wlogout
     kitty
     dunst
@@ -265,8 +266,8 @@
     kdePackages.dolphin
     adwaita-qt
     adwaita-qt6
-    # dconf-editor
-    # gnome-tweaks
+    dconf-editor
+    gnome-tweaks
     tilix
     pods
   ];
