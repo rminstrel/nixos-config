@@ -9,7 +9,8 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./flatpak.nix
-      inputs.home-manager.nixosModules.default   
+      inputs.home-manager.nixosModules.default
+      inputs.nixvim.nixosModules.nixvim
     ];
 
   # Bootloader.
@@ -53,41 +54,42 @@
 
   # Enable Hyprland for MASSIVE showoff
   # You know what else is massive?
+  # LOOOOWWWW TAYYYPER FAYYYYYDEEE!!!!!!!!
   # GET OUT!-
-  programs.hyprland.enable = true;
-  programs.waybar.enable = true;
+  # programs.hyprland.enable = true;
+  # programs.waybar.enable = true;
 
   # Enable SDDM for Hyprland and other misc. window Managers and DEs
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-  };
-  
+  # services.displayManager.sddm = {
+  #   enable = true;
+  #   wayland.enable = true;
+  # };
+
   # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-  # environment.gnome.excludePackages = with pkgs; [
-  #   gnome-contacts
-  #   gnome-weather
-  #   gnome-maps
-  #   gnome-clocks
-  #   gnome-text-editor
-  #   gnome-tour
-  #   gnome-music
-  #   gnome-calendar
-  #   gnome-console
-  #   gnome-calculator
-  #   gnome-logs
-  #   gnome-connections
-  #   gnome-software
-  #   geary
-  #   loupe
-  #   evince
-  #   totem
-  #   seahorse
-  #   epiphany
-  # ];
-  # programs.gnome-terminal.enable = false;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-contacts
+    gnome-weather
+    gnome-maps
+    gnome-clocks
+    gnome-text-editor
+    gnome-tour
+    gnome-music
+    gnome-calendar
+    gnome-console
+    gnome-calculator
+    gnome-logs
+    gnome-connections
+    gnome-software
+    geary
+    loupe
+    evince
+    totem
+    seahorse
+    epiphany
+  ];
+  programs.gnome-terminal.enable = false;
 
   # Set Qt styling
   qt = {
@@ -148,7 +150,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.lifium = {
@@ -156,26 +158,22 @@
       description = "Alif Al Amin";
       extraGroups = [ "networkmanager" "wheel" "podman" ];
       packages = with pkgs; [
-		thunderbird
-		fastfetch
-		steam
-		steam-run
-		adwsteamgtk
-		lutris-unwrapped
-		gamescope
-		mangohud
+        thunderbird
+        fastfetch
+        steam
+        steam-run
+        adwsteamgtk
+        lutris-unwrapped
+        osu-lazer-bin
+        gamescope
+        mangohud
         # inputs.legacylauncher.packages.${pkgs.system}.legacylauncher
-		libreoffice-fresh
-		evince
-        iotas
+        libreoffice-fresh
+        evince
         discord
         obs-studio
         kdePackages.kdenlive
-        audacity
-        gimp-with-plugins
-        inkscape-with-extensions
-        ollama
-        alpaca
+        kdePackages.marknote
         shotwell
         vlc
         rhythmbox
@@ -185,20 +183,14 @@
   };
 
   # Configure which fonts to install
-  fonts.packages = with pkgs; [
-    nerd-fonts.caskaydia-cove
-    nerd-fonts.iosevka-term
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.droid-sans-mono
-    nerd-fonts.fira-code
-    nerd-fonts.monaspace
-    nerd-fonts.mononoki
-    nerd-fonts.sauce-code-pro
-    nerd-fonts.liberation
-  ];
-  
+  # fonts.packages = with pkgs; [
+  #   nerd-fonts.jetbrains-mono
+  #   nerd-fonts.fira-code
+  #   nerd-fonts.liberation
+  # ];
+
   # Install home-manager for declaring home configurations
-  programs.home-manager.enable = true;
+  # programs.home-manager.enable = true;
   home-manager = {
     # also pass inputs to home-manager modules
     extraSpecialArgs = {inherit inputs;};
@@ -215,25 +207,39 @@
 
   # Enable podman for containers
   virtualisation = {
-    containers.enable = true;
-    podman = {
-      enable = true;
-      dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true;
+   containers.enable = true;
+   podman = {
+     enable = true;
+     dockerCompat = true;
+     defaultNetwork.settings.dns_enabled = true;
     };
   };
 
   # Install and configure flatpak
   services.flatpak.enable = true;
+  
+    # Configure the XDG Portal for GNOME
   xdg.portal = {
-    extraPortals = with pkgs; [ 
+    enable = true;
+    extraPortals = with pkgs; [
       xdg-desktop-portal-gnome
   ];
     config.common.default = "gnome";
   };
 
+  # Enable and configure folding@home because I'm feeling charitable today :)
+  # services.foldingathome = {
+  #   enable = true;
+  #   user = "rminstrel";
+  #   team = 236565;
+  #   daemonNiceLevel = -5;
+  # };
+
   # Install firefox.
   programs.firefox.enable = true;
+
+  # Install Nixvim for declarative configuration of Nix integrated with Neovim
+  programs.nixvim.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -242,16 +248,17 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     micro
-    neovim
-    wofi
-    wlogout
-    kitty
-    dunst
+    # vim
+    # wofi
+    # wlogout
+    # kitty
+    # dunst
     libnotify
-    networkmanagerapplet
-    hyprpaper
-    grim
-    slurp
+    brightnessctl
+    # networkmanagerapplet
+    # hyprshot
+    # grim
+    # slurp
     wget
     curl
     git
@@ -263,9 +270,9 @@
     jre8
     kanata-with-cmd
     kdePackages.qt6ct
-    kdePackages.dolphin
-    adwaita-qt
-    adwaita-qt6
+    # xfce.thunar
+    # adwaita-qt
+    # adwaita-qt6
     dconf-editor
     gnome-tweaks
     tilix
@@ -291,7 +298,7 @@
     auto-optimise-store = true;
     show-trace = true;
     experimental-features = [ "nix-command" "flakes" ];
-    substituters = [ "https://aseipp-nix-cache.global.ssl.fastly.net" "https://nix-community.cachix.org" "https://mirror.sjtu.edu.cn/nix-channels/store" ];
+    substituters = [ "https://nix-community.cachix.org" "https://mirror.sjtu.edu.cn/nix-channels/store" ];
     trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
   };
 
@@ -331,6 +338,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 
 }

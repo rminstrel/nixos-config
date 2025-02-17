@@ -6,14 +6,19 @@
     
     # Home-manager for managing home configuration
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs"; # Use system packages list where available
     };
     
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Add your legacylauncher flake input
-    legacylauncher.url = "github:rminstrel/llaunch-nixos";
+    # legacylauncher.url = "github:rminstrel/llaunch-nixos";
     
-    # Community packages; used for Firefox extensions
+    # Community packages from NUR (Nix User Repository)
     nur.url = "github:nix-community/nur";
 
   };
@@ -23,7 +28,7 @@
     nixpkgs, 
     home-manager, 
     nur, 
-    legacylauncher, 
+    # legacylauncher,
     ... 
     }@inputs: {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {

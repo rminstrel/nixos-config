@@ -13,12 +13,11 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "24.11"; # Please read the comment before changing.
+  home.stateVersion = "25.05"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # Insert packages here
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -58,18 +57,17 @@
 
   # Enable Hyprland to configure it using home-manager
   wayland.windowManager.hyprland = {
-    enable = true;
-    systemd.enable = true;
+    enable = false;
+    systemd.enable = false;
     settings = {
       monitor = [ "eDP-1, preferred, auto, 1" ];
 
-      "$terminal" = "kitty";
-      "$fileManager" = "dolphin";
+      "$terminal" = "tilix";
+      "$fileManager" = "thunar";
       "$menu" = "wofi --show drun";
 
       exec-once = [
-        "nm-applet &"
-        "hyprpaper & dunst"
+        "nm-applet & hyprpaper & dunst"
       ];
 
       env = [
@@ -90,8 +88,8 @@
 
       decoration = {
         rounding = 0;
-        active_opacity = 1.0;
-        inactive_opacity = 1.0;
+        active_opacity = 0.875;
+        inactive_opacity = 0.8;
         shadow = {
           enabled = true;
           range = 5;
@@ -227,28 +225,6 @@
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       ];
     };
-  };
-
-  gtk = {
-    enable = true;
-    font = {
-      name = "Cantarell";
-      size = 11;
-    };
-    iconTheme.name = "ePapirus-dark";
-    theme.name = "Adwaita-dark";
-    cursorTheme = {
-      name = "Bibata-Modern-Ice";
-      size = 24;
-    };
-  };
-
-  services.hyprpaper = {
-    enable = true;
-    extraConfig = { ''
-    preload = /home/lifium/Pictures/wallpapers/wallhaven3.jpg
-    wallpaper = eDP-1, /home/lifium/Pictures/wallpapers/wallhaven3.jpg
-    '' };
   };
 
   # Let Home Manager install and manage itself.

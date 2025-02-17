@@ -6,7 +6,7 @@ let
 
   # 1. Declare the Flatpaks you *want* on your system
   desiredFlatpaks = [
-    "ch.tlaun.TL"
+    "com.github.tchx84.Flatseal"
   ];
 in
 {
@@ -14,7 +14,7 @@ in
     text = ''
       # 2. Ensure the Flathub repo is added
       ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub \
-        https://flathub.org/repo/flathub.flatpakrepo
+        https://dl.flathub.org/repo/flathub.flatpakrepo
 
       # 3. Get currently installed Flatpaks
       installedFlatpaks=$(${pkgs.flatpak}/bin/flatpak list --app --columns=application)

@@ -9,28 +9,36 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "fuse" "kvm-intel" "coretemp" "i915" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.kernelModules = [ "kvm-intel" "i915" "fuse" "coretemp" "rtw88_8821ce" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/432a795d-ff0e-447d-8a2b-fa50c475e7c7";
-      fsType = "ext4";
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/2C8B-715D";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+    { device = "/dev/vg0/linux_root";
+      fsType = "btrfs";
+      options = [ "rw" "relatime" "compress=zstd" "subvolid=5" "subvol=/" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/57bd634a-4b1e-48ad-9740-e2b425a5ae80";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/852dfd45-405c-4652-94a9-939500b84ef7";
+      fsType = "btrfs";
+      options = [ "rw" "relatime" "subvolid=5" "subvol=/" ];
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/ED58-2AE9";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+
+  fileSystems."/home/lifium/.config" =
+    { device = "/dev/disk/by-uuid/852dfd45-405c-4652-94a9-939500b84ef7";
+      fsType = "btrfs";
+      options = [ "subvolid=256" "subvol=config" ];
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/b15f6700-5f3c-4f0b-be5c-a4fc8f1a65d7"; }
+    [ { device = "/dev/vg0/linux_swap"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
