@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./flatpak.nix
-      inputs.home-manager.nixosModules.default
+      # inputs.home-manager.nixosModules.default
       inputs.nixvim.nixosModules.nixvim
     ];
 
@@ -189,13 +189,12 @@
 
   # Install home-manager for declaring home configurations
   # programs.home-manager.enable = true;
-  home-manager = {
-    # also pass inputs to home-manager modules
-    extraSpecialArgs = {inherit inputs;};
-    users = {
-      "rminstrel" = import ./home-manager/home.nix;
-    };
-  };
+  # home-manager = {
+  #   extraSpecialArgs = {inherit inputs;};
+  #   users = {
+  #     "rminstrel" = import ./home-manager/home.nix;
+  #   };
+  # };
 
   # getty autologin for rminstrel
   services.getty.autologinUser = "rminstrel";

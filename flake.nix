@@ -4,11 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     
-    # Home-manager for managing home configuration
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs"; # Use system packages list where available
-    };
+    # # Home-manager for managing home configuration
+    # home-manager = {
+    #   url = "github:nix-community/home-manager/master";
+    #   inputs.nixpkgs.follows = "nixpkgs"; # Use system packages list where available
+    # };
     
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -26,7 +26,7 @@
   outputs = { 
     self,
     nixpkgs, 
-    home-manager, 
+    # home-manager, 
     nur, 
     # legacylauncher,
     ... 
@@ -36,7 +36,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
-        inputs.home-manager.nixosModules.default
+        # inputs.home-manager.nixosModules.default
       ];
     };
   };
