@@ -95,7 +95,7 @@
   qt = {
     enable = true;
     style = "adwaita-dark";
-    platformTheme = "qt5ct";
+    platformTheme = "gnome";
   };
 
   # Configure keymap in X11
@@ -173,7 +173,6 @@
         discord
         obs-studio
         kdePackages.kdenlive
-        kdePackages.marknote
         shotwell
         vlc
         rhythmbox
