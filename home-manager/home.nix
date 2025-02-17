@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "lifium";
-  home.homeDirectory = "/home/lifium";
+  home.username = "rminstrel";
+  home.homeDirectory = "/home/rminstrel";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -49,7 +49,7 @@
   #
   # or
   #
-  #  /etc/profiles/per-user/lifium/etc/profile.d/hm-session-vars.sh
+  #  /etc/profiles/per-user/rminstrel/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
     # EDITOR = "emacs";

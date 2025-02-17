@@ -31,7 +31,7 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  fileSystems."/home/lifium/.config" =
+  fileSystems."/home/rminstrel/.config" =
     { device = "/dev/disk/by-uuid/852dfd45-405c-4652-94a9-939500b84ef7";
       fsType = "btrfs";
       options = [ "subvolid=256" "subvol=config" ];

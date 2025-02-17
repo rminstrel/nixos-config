@@ -153,7 +153,7 @@
   services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.lifium = {
+    users.users.rminstrel = {
       isNormalUser = true;
       description = "Alif Al Amin";
       extraGroups = [ "networkmanager" "wheel" "podman" ];
@@ -193,12 +193,12 @@
     # also pass inputs to home-manager modules
     extraSpecialArgs = {inherit inputs;};
     users = {
-      "lifium" = import ./home-manager/home.nix;
+      "rminstrel" = import ./home-manager/home.nix;
     };
   };
 
-  # getty autologin for lifium
-  services.getty.autologinUser = "lifium";
+  # getty autologin for rminstrel
+  services.getty.autologinUser = "rminstrel";
 
   # Disable password for sudo (I'm tired of inputting passwords on my own damn computer)
   security.sudo.wheelNeedsPassword = false;
