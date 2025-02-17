@@ -161,7 +161,6 @@
         thunderbird
         fastfetch
         steam
-        steam-run
         adwsteamgtk
         lutris-unwrapped
         osu-lazer-bin
@@ -266,6 +265,7 @@
     wl-clipboard-x11
     wineWowPackages.waylandFull
     winetricks
+    steam-run
     jre8
     kanata-with-cmd
     kdePackages.qt6ct

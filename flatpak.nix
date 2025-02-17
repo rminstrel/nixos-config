@@ -6,7 +6,8 @@ let
 
   # 1. Declare the Flatpaks you *want* on your system
   desiredFlatpaks = [
-    "com.github.tchx84.Flatseal"
+    "com.github.tchx84.Flatseal/x86_64/stable"
+    "ch.tlaun.TL/x86_64/stable"
   ];
 in
 {
@@ -35,6 +36,9 @@ in
 
       # 6. Update all installed Flatpaks
       ${pkgs.flatpak}/bin/flatpak update -y
+
+      # 7. Apply override to Legacy Launcher flatpak so that I can pirate Minecraft basically
+      ${pkgs.flatpak}/bin/flatpak --user override ch.tlaun.TL --env=TL_BOOTSTRAP_OPTIONS=-Doomsday
     '';
   };
 }
