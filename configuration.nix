@@ -4,7 +4,6 @@
   imports = [ 
       ./hardware-configuration.nix
       ./modules/flatpak.nix
-      ./modules/linux-kernel.nix
       # inputs.home-manager.nixosModules.default
       inputs.nixvim.nixosModules.nixvim
     ];
