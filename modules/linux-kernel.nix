@@ -14,7 +14,7 @@ let
     version = latest_kernel_version;
     src = pkgs.fetchurl {
       url = kernel_source_url;
-      sha256 = lib.fakeSha256; testing purposes
+      sha256 = lib.fakeSha256;
     };
 
     # Copy the .config file from CachyOS Github repo
