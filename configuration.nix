@@ -1,14 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, lib, inputs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
+  imports = [ 
       ./hardware-configuration.nix
-      ./flatpak.nix
+      ./modules/flatpak.nix
+      ./modules/linux-kernel.nix
       # inputs.home-manager.nixosModules.default
       inputs.nixvim.nixosModules.nixvim
     ];
@@ -17,14 +13,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "hp-15s-du1015tu"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # Define your hostname.
+  networking.hostName = "hp-15s-du1015tu"; 
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
+  # Enable networking via NetworkManager
   networking.networkmanager.enable = true;
 
   # Set your time zone.
@@ -44,7 +36,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Set the environment variables
+  # Set any system-wide environment variables
   environment.sessionVariables = {
   EDITOR = "micro";
   };
@@ -52,7 +44,7 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable Hyprland for MASSIVE showoff
+  # Enable Hyprland and Waybar for MASSIVE showoff
   # You know what else is massive?
   # LOOOOWWWW TAYYYPER FAYYYYYDEEE!!!!!!!!
   # GET OUT!-
@@ -70,21 +62,15 @@
   services.xserver.desktopManager.gnome.enable = true;
   environment.gnome.excludePackages = with pkgs; [
     gnome-contacts
-    gnome-weather
-    gnome-maps
-    gnome-clocks
     gnome-text-editor
     gnome-tour
     gnome-music
-    gnome-calendar
     gnome-console
-    gnome-calculator
     gnome-logs
     gnome-connections
     gnome-software
     geary
     loupe
-    evince
     totem
     seahorse
     epiphany
@@ -141,12 +127,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
     jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    # media-session.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -164,11 +145,9 @@
         adwsteamgtk
         lutris-unwrapped
         osu-lazer-bin
-        gamescope
         mangohud
         # inputs.legacylauncher.packages.${pkgs.system}.legacylauncher
         libreoffice-fresh
-        evince
         discord
         obs-studio
         kdePackages.kdenlive
@@ -215,12 +194,10 @@
   # Install and configure flatpak
   services.flatpak.enable = true;
   
-    # Configure the XDG Portal for GNOME
+  # Configure the XDG Portal
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gnome
-  ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
     config.common.default = "gnome";
   };
 
@@ -278,7 +255,12 @@
   ];
 
   # Some kernel shenanigans
-  boot.kernelParams = [ "rw" "rootfstype=ext4" "loglevel=7" "debug" "pcie_aspm=off" "pci=noaer" "mitigations=off" "sysrq_always_enabled=1" ];
+  boot.kernelParams = [ "rw" "rootfstype=btrfs" "loglevel=7" "quiet" "splash" "pcie_aspm=off" "pci=noaer" "mitigations=off" "sysrq_always_enabled=1" ];
+  boot.kernelPackages = pkgs.linuxKernel_cachyos-rminstrel;
+  services.scx = {
+    enable = true;
+    scheduler = "scx_simple";
+  };
 
   # Fix that damn lid on HP laptops
   systemd.services.hp-keycodes = {
@@ -296,8 +278,8 @@
     auto-optimise-store = true;
     show-trace = true;
     experimental-features = [ "nix-command" "flakes" ];
-    substituters = [ "https://nix-community.cachix.org" "https://mirror.sjtu.edu.cn/nix-channels/store" ];
-    trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
+    substituters = [ "https://nix-community.cachix.org" "https://chaotic-nyx.cachix.org" "https://mirror.sjtu.edu.cn/nix-channels/store" ];
+    trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8=" ];
   };
 
   # OpenGL shenanigans

@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     
     # # Home-manager for managing home configuration
     # home-manager = {
@@ -25,7 +26,8 @@
 
   outputs = { 
     self,
-    nixpkgs, 
+    nixpkgs,
+    chaotic,
     # home-manager, 
     nur, 
     # legacylauncher,
@@ -36,6 +38,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
+        chaotic.nixosModules.default
         # inputs.home-manager.nixosModules.default
       ];
     };
