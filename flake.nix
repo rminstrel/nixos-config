@@ -16,9 +16,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Add your legacylauncher flake input
-    # legacylauncher.url = "github:rminstrel/llaunch-nixos";
-    
+    # Add nix-flatpak to manage flatpaks declaratively
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
     # Community packages from NUR (Nix User Repository)
     nur.url = "github:nix-community/nur";
 
@@ -28,18 +28,25 @@
     self,
     nixpkgs,
     chaotic,
+    nix-flatpak,
     # home-manager, 
     nur, 
-    # legacylauncher,
     ... 
     }@inputs: {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.hp-15s-du1015tu = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
-        chaotic.nixosModules.default
-        # inputs.home-manager.nixosModules.default
+        # ./desktop-configuration.nix
+        # ./flatpak-configuration.nix
+        # ./hardware-configuration.nix
+        # ./software-configuration.nix
+        # ./style-configuration.nix
+        # ./user-configuration.nix
+        chaotic.nixosModules.hp-15s-du1015tu
+        nix-flatpak.nixosModules.nix-flatpak
+        # inputs.home-manager.nixosModules.hp-15s-du1015tu
       ];
     };
   };
