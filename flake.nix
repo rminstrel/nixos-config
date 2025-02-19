@@ -1,29 +1,19 @@
 {
-  description = "Nixos config flake";
-
+  description = "NixOS configuration flake";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    
-    # # Home-manager for managing home configuration
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable"; # <- Nixpkgs unstable branch
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # <- Chaotic Nyx for even more bleeding-edge packages
     # home-manager = {
     #   url = "github:nix-community/home-manager/master";
-    #   inputs.nixpkgs.follows = "nixpkgs"; # Use system packages list where available
-    # };
-    
+    #   inputs.nixpkgs.follows = "nixpkgs"; # <- Use system packages list where available
+    # }; # <- Home-manager for managing home configuration
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Add nix-flatpak to manage flatpaks declaratively
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-
-    # Community packages from NUR (Nix User Repository)
-    nur.url = "github:nix-community/nur";
-
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest"; # <- Add nix-flatpak to manage flatpaks declaratively
+    nur.url = "github:nix-community/nur"; # <- Community packages from NUR (Nix User Repository)
   };
-
   outputs = { 
     self,
     nixpkgs,
@@ -31,8 +21,7 @@
     nix-flatpak,
     # home-manager, 
     nur, 
-    ... 
-    }@inputs: {
+    ... }@inputs: {
     nixosConfigurations.hp-15s-du1015tu = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };

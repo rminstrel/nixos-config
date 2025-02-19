@@ -1,30 +1,21 @@
-{ config, pkgs, lib, ... }:
-
-{
+{ config, pkgs, lib, ... }: {
   imports = [ 
     # inputs.home-manager.nixosModules.default
   ];
-
-  # Set Qt styling
   qt = {
     enable = true;
     style = "adwaita-dark";
     platformTheme = "gnome";
-  };
-
-  # Configure which fonts to install
+  }; # <- Set Qt styling.
   # fonts.packages = with pkgs; [
   #   nerd-fonts.jetbrains-mono
   #   nerd-fonts.fira-code
   #   nerd-fonts.liberation
-  # ];
-
-  # Install home-manager for declaring home configurations
-  # programs.home-manager.enable = true;
+  # ]; # <- Configure which fonts to install.
   # home-manager = {
   #   extraSpecialArgs = {inherit inputs;};
   #   users = {
   #     "rminstrel" = import ../home-manager/home.nix;
-  #   };
-  # };
+  #   }; # Import home configuration of user "rminstrel".
+  # }; # <- Install home-manager for declaring home configurations.
 }

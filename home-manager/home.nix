@@ -1,80 +1,29 @@
-{ config, pkgs, ... }:
-
-{
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "rminstrel";
-  home.homeDirectory = "/home/rminstrel";
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
-
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
+{ config, pkgs, ... }: {
+  home.username = "rminstrel"; # <- Pretty self-explanatory.
+  home.homeDirectory = "/home/rminstrel"; # <- Defines home directory for user "rminstrel".
+  home.stateVersion = "25.05"; # <- This value determines the Home Manager release that your configuration is compatible with.
   home.packages = with pkgs; [
-  ];
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
+  ]; # <- The home.packages option allows you to install Nix packages into your home environment.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
-
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/rminstrel/etc/profile.d/hm-session-vars.sh
-  #
+  }; # <- Define symlinks to dotfiles and the contents of the dotfiles.
   home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
-
-  # Enable Hyprland to configure it using home-manager
+    EDITOR = "micro";
+  }; # <- Define Environment Variables for user session. 
   wayland.windowManager.hyprland = {
     enable = false;
     systemd.enable = false;
     settings = {
       monitor = [ "eDP-1, preferred, auto, 1" ];
-
       "$terminal" = "tilix";
       "$fileManager" = "thunar";
       "$menu" = "wofi --show drun";
-
       exec-once = [
         "nm-applet & hyprpaper & dunst"
       ];
-
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,24"
       ];
-
       general = {
         gaps_in = 0;
         gaps_out = 0;
@@ -85,7 +34,6 @@
         allow_tearing = false;
         layout = "dwindle";
       };
-
       decoration = {
         rounding = 0;
         active_opacity = 0.875;
@@ -103,7 +51,6 @@
           vibrancy = 0.2;
         };
       };
-
       animations = {
         enabled = true;
         bezier = [
@@ -134,28 +81,22 @@
           "workspacesOut, 1, 2, almostLinear, fade"
         ];
       };
-
       dwindle = {
         pseudotile = true;
         preserve_split = true;
       };
-
       misc = {
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
       };
-
       input = {
         kb_layout = "us";
         follow_mouse = 1;
         sensitivity = 0;
         touchpad.natural_scroll = true;
       };
-
       gestures.workspace_swipe = true;
-
       "$mainMod" = "SUPER";
-
       bind = [
         "$mainMod, Return, exec, $terminal"
         "$mainMod, Q, killactive,"
@@ -198,12 +139,10 @@
         "Shift, Print, exec, hyprshot -m output -o ~/Pictures/Screenshots -z"
         "Alt, Print, exec, hyprshot -m window -o ~/Pictures/Screenshots -z"
       ];
-
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
-
       bindel = [
         ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"
         ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
@@ -212,21 +151,17 @@
         ",XF86MonBrightnessUp, exec, brightnessctl s 1%+"
         ",XF86MonBrightnessDown, exec, brightnessctl s 1%-"
       ];
-
       bindl = [
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPause, exec, playerctl play-pause"
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
       ];
-
       windowrulev2 = [
         "suppressevent maximize, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       ];
     };
-  };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  }; # <- Enable Hyprland and configure it using home-manager
+  programs.home-manager.enable = true; # <- Let Home Manager install and manage itself.
 }

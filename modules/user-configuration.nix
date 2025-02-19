@@ -1,6 +1,4 @@
-{ config, pkgs, lib, ... }:
-
-{
+{ config, pkgs, lib, ... }: {
   users.users = { 
     rminstrel = {
       isNormalUser = true;
@@ -24,7 +22,7 @@
         qbittorrent
         vscodium
       ];
-    };
+    }; # <- Define user "rminstrel". (me)
     fsmoni = {
       isNormalUser = true;
       description = "Farjana Sharmen";
@@ -35,6 +33,6 @@
         vlc
         rhythmbox
       ];
-    };
-  };
+    }; # <- Define user "fsmoni". (my mom)
+  }; # <- Define users for the system.
 }

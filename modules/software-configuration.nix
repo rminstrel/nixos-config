@@ -1,24 +1,11 @@
-{ pkgs, lib, inputs, ...}:
-
-{
+{ pkgs, lib, inputs, ...}: {
   imports = [
     inputs.nixvim.nixosModules.nixvim
   ];
-  
-  # Install firefox.
-  programs.firefox.enable = true;
-
-  # Install Nixvim for declarative configuration of Nix integrated with Neovim
-  programs.nixvim.enable = true;
-
-  # Remove nano because it sucks balls
-  programs.nano.enable = false;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  programs.firefox.enable = true; # <- Install firefox.
+  programs.nixvim.enable = true; # <- Install Nixvim for declarative configuration of Nix integrated with Neovim.
+  programs.nano.enable = false; # <- Remove nano because it sucks balls.
+  nixpkgs.config.allowUnfree = true; # <- Allow unfree packages.
   environment.systemPackages = with pkgs; [
     micro
     # vim
@@ -35,6 +22,7 @@
     wget
     curl
     git
+    nixd
     links2
     wl-clipboard
     wl-clipboard-x11
@@ -51,5 +39,5 @@
     gnome-tweaks
     tilix
     pods
-  ];
+  ]; # <- List packages to be installed in system profile.
 }
