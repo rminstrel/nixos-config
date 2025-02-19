@@ -37,14 +37,14 @@
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
-        ./system-configuration.nix
-        ./desktop-configuration.nix
-        ./flatpak-configuration.nix
-        ./hardware-configuration.nix
-        ./software-configuration.nix
-        ./style-configuration.nix
-        ./user-configuration.nix
-        chaotic.nixosModules.hp-15s-du1015tu
+        ./modules/system-configuration.nix
+        ./modules/desktop-configuration.nix
+        ./modules/flatpak-configuration.nix
+        ./modules/hardware-configuration.nix
+        ./modules/software-configuration.nix
+        ./modules/style-configuration.nix
+        ./modules/user-configuration.nix
+        chaotic.nixosModules.default
         nix-flatpak.nixosModules.nix-flatpak
         # inputs.home-manager.nixosModules.hp-15s-du1015tu
       ];
