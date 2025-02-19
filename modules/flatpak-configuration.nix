@@ -10,6 +10,7 @@
     packages = [
       "com.github.tchx84.Flatseal"
       "ch.tlaun.TL"
+      "com.modrinth.ModrinthApp"
     ]; # <- Define packages to be installed.
     overrides = {
       "ch.tlaun.TL".Environment.TL_BOOTSTRAP_OPTIONS = "-Doomsday";

@@ -11,7 +11,6 @@
         lutris-unwrapped
         osu-lazer-bin
         mangohud
-        modrinth-app
         libreoffice-fresh
         discord
         obs-studio

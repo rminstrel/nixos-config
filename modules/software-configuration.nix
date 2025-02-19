@@ -30,12 +30,9 @@
     wineWowPackages.waylandFull
     winetricks
     steam-run
-    jre8
     kanata-with-cmd
     kdePackages.qt6ct
     # xfce.thunar
-    # adwaita-qt
-    # adwaita-qt6
     shotwell
     vlc
     rhythmbox
