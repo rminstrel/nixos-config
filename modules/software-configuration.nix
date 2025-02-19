@@ -1,10 +1,11 @@
-{ pkgs, lib, inputs, ...}: {
+{ pkgs, inputs, ... }: {
   imports = [
     inputs.nixvim.nixosModules.nixvim
   ];
   programs.firefox.enable = true; # <- Install firefox.
   programs.nixvim.enable = true; # <- Install Nixvim for declarative configuration of Nix integrated with Neovim.
   programs.nano.enable = false; # <- Remove nano because it sucks balls.
+  programs.bash.blesh.enable = true; # <- Enable ble.sh, a fully featured line editor written in bash.
   nixpkgs.config.allowUnfree = true; # <- Allow unfree packages.
   environment.systemPackages = with pkgs; [
     micro
@@ -35,6 +36,9 @@
     # xfce.thunar
     # adwaita-qt
     # adwaita-qt6
+    shotwell
+    vlc
+    rhythmbox
     dconf-editor
     gnome-tweaks
     tilix

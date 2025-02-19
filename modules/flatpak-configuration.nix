@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ ... }: {
   services.flatpak = { 
     enable = true; # <- Enables flatpak for installing containerized and isolated applications. (as if NixOS wasn't isolated enough) 
     # remotes = lib.mkOptionDefault [{

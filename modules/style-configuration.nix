@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ ... }: {
   imports = [ 
     # inputs.home-manager.nixosModules.default
   ];
@@ -16,6 +16,6 @@
   #   extraSpecialArgs = {inherit inputs;};
   #   users = {
   #     "rminstrel" = import ../home-manager/home.nix;
-  #   }; # Import home configuration of user "rminstrel".
+  #   }; # <- Import home configuration of user "rminstrel".
   # }; # <- Install home-manager for declaring home configurations.
 }

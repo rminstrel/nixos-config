@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ pkgs, ... }: {
   users.users = { 
     rminstrel = {
       isNormalUser = true;
@@ -8,17 +8,14 @@
         thunderbird
         fastfetch
         steam
-        adwsteamgtk
         lutris-unwrapped
         osu-lazer-bin
         mangohud
+        modrinth-app
         libreoffice-fresh
         discord
         obs-studio
         kdePackages.kdenlive
-        shotwell
-        vlc
-        rhythmbox
         qbittorrent
         vscodium
       ];
@@ -29,9 +26,7 @@
       packages = with pkgs; [
         thunderbird
         libreoffice-fresh
-        shotwell
-        vlc
-        rhythmbox
+        zoom-us
       ];
     }; # <- Define user "fsmoni". (my mom)
   }; # <- Define users for the system.

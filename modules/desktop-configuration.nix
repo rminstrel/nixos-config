@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ pkgs, ... }: {
   services.xserver.enable = true; # <- Enable the X11 windowing system.
   services.xserver.xkb = {
     layout = "us";

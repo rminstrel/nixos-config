@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }: {
+{ pkgs, ... }: {
   networking.networkmanager.enable = true; # <- Enable networking via NetworkManager.
   time.timeZone = "Asia/Dhaka"; # <- Set the time zone. 
   i18n.defaultLocale = "en_US.UTF-8";
