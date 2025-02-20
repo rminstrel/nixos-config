@@ -6,7 +6,6 @@
       extraGroups = [ "networkmanager" "wheel" "podman" ];
       packages = with pkgs; [
         thunderbird
-        fastfetch
         steam
         lutris-unwrapped
         osu-lazer-bin

@@ -1,13 +1,22 @@
-{ pkgs, inputs, ... }: {
+{ 
+  pkgs,
+  inputs,
+  ... }: {
   imports = [
+    inputs.home-manager.nixosModules.default
     inputs.nixvim.nixosModules.nixvim
   ];
   programs.firefox.enable = true; # <- Install firefox.
   programs.nixvim.enable = true; # <- Install Nixvim for declarative configuration of Nix integrated with Neovim.
   programs.nano.enable = false; # <- Remove nano because it sucks balls.
+  home-manager = {
+    extraSpecialArgs = {inherit inputs;};
+    users = {
+      "rminstrel" = import ../home-manager/home.nix;
+    }; # <- Import home configuration of user "rminstrel".
+  }; # <- Install home-manager for declaring home configurations.
   nixpkgs.config.allowUnfree = true; # <- Allow unfree packages.
   environment.systemPackages = with pkgs; [
-    micro
     # vim
     # wofi
     # wlogout
@@ -30,7 +39,6 @@
     winetricks
     steam-run
     kanata-with-cmd
-    kdePackages.qt6ct
     # xfce.thunar
     shotwell
     vlc

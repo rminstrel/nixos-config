@@ -1,4 +1,6 @@
-{ pkgs, ... }: {
+{ 
+  pkgs,
+  ... }: {
   services.xserver.enable = true; # <- Enable the X11 windowing system.
   services.xserver.xkb = {
     layout = "us";
@@ -44,5 +46,5 @@
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
     config.common.default = "gnome";
-  }; # Configure the XDG Portal for GNOME.
+  }; # <- Configure the XDG Portal for GNOME.
 }

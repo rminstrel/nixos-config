@@ -1,4 +1,6 @@
-{ pkgs, ... }: {
+{ 
+  pkgs,
+  ... }: {
   networking.networkmanager.enable = true; # <- Enable networking via NetworkManager.
   time.timeZone = "Asia/Dhaka"; # <- Set the time zone. 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -14,8 +16,7 @@
     LC_TIME = "en_US.UTF-8";
   }; # <- Select internationalisation properties.
   environment.sessionVariables = {
-  EDITOR = "micro";
-  # MOZ_ENABLE_WAYLAND = "1";
+    # FOO = "BAR"; 
   }; # <- Set any system-wide environment variables.
   services.kanata = {
     enable = true;
@@ -54,7 +55,7 @@
     enable = true;
     user = "rminstrel";
     team = 236565;
-    daemonNiceLevel = -5;
+    daemonNiceLevel = -20;
   }; # <- Enable and configure folding@home because I'm feeling charitable today :)
   systemd.services.hp-keycodes = {
     description = "HP setkeycodes fix";
