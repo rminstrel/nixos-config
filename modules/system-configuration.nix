@@ -72,8 +72,8 @@
     auto-optimise-store = true;
     show-trace = true;
     experimental-features = [ "nix-command" "flakes" ];
-    substituters = [ "https://nix-community.cachix.org" "https://chaotic-nyx.cachix.org" "https://mirror.sjtu.edu.cn/nix-channels/store" ];
-    trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8=" ];
+    substituters = [ "https://nix-community.cachix.org" "https://chaotic-nyx.cachix.org" "https://cosmic.cachix.org/" "https://mirror.sjtu.edu.cn/nix-channels/store" ];
+    trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8=" "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
   }; # <- Some nix settings to improve rebuild performance and reduce rebuild times.
   programs.mtr.enable = true; # <- Some programs need SUID wrappers, can be configured further or are started in user sessions.
   programs.gnupg.agent = {

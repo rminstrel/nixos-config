@@ -7,6 +7,7 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs"; # <- Use system packages list where available
     }; # <- Home-manager for managing home configuration
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest"; # <- Add nix-flatpak to manage flatpaks declaratively
     # nur.url = "github:nix-community/nur"; # <- Community packages from NUR (Nix User Repository)
   };
@@ -14,8 +15,9 @@
     # self,
     nixpkgs,
     chaotic,
-    nix-flatpak,
     home-manager,
+    nix-flatpak,
+    nixos-cosmic,
     # nur,
     ... } @ inputs: {
     nixosConfigurations.hp-15s-du1015tu = nixpkgs.lib.nixosSystem {
@@ -31,6 +33,7 @@
         chaotic.nixosModules.default
         nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager
+        nixos-cosmic.nixosModules.default
       ];
     };
   };

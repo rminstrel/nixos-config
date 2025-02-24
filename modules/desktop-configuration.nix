@@ -25,23 +25,27 @@
   #   enable = true;
   #   wayland.enable = true;
   # }; # <- Enable SDDM for Hyprland and other miscellaneous Window Managers and KDE Plasma.
-  services.xserver.displayManager.gdm.enable = true; # <- Enable GDM for GNOME.
-  services.xserver.desktopManager.gnome.enable = true; # <- Enable the GNOME Desktop Environment.
-  environment.gnome.excludePackages = with pkgs; [
-    gnome-contacts
-    gnome-text-editor
-    gnome-tour
-    gnome-music
-    gnome-console
-    gnome-logs
-    gnome-connections
-    gnome-software
-    geary
-    loupe
-    totem
-    seahorse
-    epiphany
-  ]; # <- Define GNOME packages to not be installed because there are better alternatives.
+  # services.xserver.displayManager.gdm.enable = true; # <- Enable GDM for GNOME.
+  # services.xserver.desktopManager.gnome.enable = true; # <- Enable the GNOME Desktop Environment.
+  # environment.gnome.excludePackages = with pkgs; [
+  #   gnome-contacts
+  #   gnome-text-editor
+  #   gnome-tour
+  #   gnome-music
+  #   gnome-console
+  #   gnome-logs
+  #   gnome-connections
+  #   gnome-software
+  #   geary
+  #   loupe
+  #   totem
+  #   seahorse
+  #   epiphany
+  # ]; # <- Define GNOME packages to not be installed because there are better alternatives.
+  services.displayManager = {
+    cosmic.enable = true;
+    cosmic-greeter.enable = true;
+  };
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
