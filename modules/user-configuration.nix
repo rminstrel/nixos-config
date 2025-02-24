@@ -3,7 +3,8 @@
     rminstrel = {
       isNormalUser = true;
       description = "Alif Al Amin";
-      extraGroups = [ "networkmanager" "wheel" "podman" ];
+      extraGroups = [ "networkmanager" "wheel" "podman" "libvirtd" ];
+      shell = pkgs.zsh;
       packages = with pkgs; [
         thunderbird
         steam

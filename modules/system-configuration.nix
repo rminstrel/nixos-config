@@ -39,18 +39,20 @@
 )
   '';
     };
-  }; # <- Configure kanata for replacing Caps Lock with Esc. (obviously for *vi*)
+  }; # <- Configure kanata for replacing Caps Lock with Esc. (obviously for multimodal text editors like *vi* and helix etc.)
   services.printing.enable = true; # <- Enable CUPS for printing documents.
   services.getty.autologinUser = "rminstrel"; # <- Set up getty autologin for rminstrel.
   security.sudo.wheelNeedsPassword = false; # <- Disable password for sudo. (I'm tired of inputting passwords on my own damn computer)
   virtualisation = {
-   containers.enable = true;
-   podman = {
-     enable = true;
-     dockerCompat = true;
-     defaultNetwork.settings.dns_enabled = true;
-    };
-  }; # <- Enable podman for running containers.
+    libvirtd.enable = true; # <- Enables libvirtd for QEMU and Virt-manager.
+    containers.enable = true;
+      podman = {
+        enable = true;
+        dockerCompat = true;
+        defaultNetwork.settings.dns_enabled = true;
+      }; # <- Enable podman for running containers.
+  }; # <- Configure virtualisation.
+  programs.virt-manager.enable = true; # <- Enable Virt-manager for managing Virtual Machines using QEMU.
   services.foldingathome = {
     enable = true;
     user = "rminstrel";
