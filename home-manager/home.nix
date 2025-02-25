@@ -9,6 +9,7 @@
   home.username = "rminstrel"; # <- Pretty self-explanatory.
   home.homeDirectory = "/home/rminstrel"; # <- Defines home directory for user "rminstrel".
   home.stateVersion = "24.11"; # <- This value determines the Home Manager release that your configuration is compatible with.
+  # home.backupFileExtension = "backup";
   home.packages = with pkgs; [
     liberation_ttf
     noto-fonts
@@ -23,6 +24,10 @@
     enable = true;
     userName = "Alif Al Amin";
     userEmail = "alifalamin586@gmail.com";
+    extraConfig = {
+      core.compression = 0;
+      http.postBuffer = 2147483647;
+    };
   }; # <- Configure git globally.
   programs.zsh = {
 	  enable = true;
@@ -230,7 +235,7 @@
     };
   }; # <- Configure fontconfig.
   wayland.windowManager.hyprland = {
-    enable = false;
+    enable = true;
     systemd.enable = false;
     settings = {
       monitor = [ "eDP-1, preferred, auto, 1" ];
@@ -238,7 +243,7 @@
       "$fileManager" = "thunar";
       "$menu" = "wofi --show drun";
       exec-once = [
-        "nm-applet & hyprpaper & dunst"
+        "waybar & nm-applet & hyprpaper & dunst"
       ];
       env = [
         "XCURSOR_SIZE,24"
@@ -274,13 +279,11 @@
       animations = {
         enabled = true;
         bezier = [
-    		"easeOutExpo,0.19,1,0.22,1"
-   			"easeInOutCubic,0.65,0.05,0.36,1"
-    		"linear,0,0,1,1"
-    		"almostLinear,0.5,0.5,0.75,1.0"
-    		"quick,0.15,0,0.1,1"
-    		"gentlePop,0.34,1.56,0.64,1"
-    		"smoothSlide,0.25,1,0.3,1"
+          "easeOutQuint,0.25,1,0.3,1"
+          "easeInOutCubic,0.6,0.05,0.4,1"
+          "linear,0,0,1,1"
+          "almostLinear,0.5,0.5,0.75,1.0"
+          "quick,0.15,0,0.1,1"
         ];
         animation = [
           "global, 1, 8, default"

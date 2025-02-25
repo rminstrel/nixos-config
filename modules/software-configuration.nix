@@ -16,15 +16,16 @@
   }; # <- Install home-manager for declaring home configurations.
   nixpkgs.config.allowUnfree = true; # <- Allow unfree packages.
   environment.systemPackages = with pkgs; [
-    # wofi
-    # wlogout
+    wofi
+    wlogout
     # kitty
-    # dunst
-    # networkmanagerapplet
-    # hyprshot
-    # grim
-    # slurp
-    # xfce.thunar
+    dunst
+    networkmanagerapplet
+    hyprshot
+    grim
+    slurp
+    xfce.thunar
+    hyprpaper
     libnotify
     brightnessctl
     wget
@@ -40,6 +41,7 @@
     shotwell
     vlc
     rhythmbox
+    kdePackages.okular
     dconf-editor
     gnome-tweaks
     tilix

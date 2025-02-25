@@ -19,12 +19,12 @@
   }; # <- Enable sound with pipewire.
   services.libinput.enable = true; # <- Enable touchpad support. (enabled default in most desktopManager).
   # Enable Hyprland and Waybar below for MASSIVE showoff. You know what else is MASSIVE? LOW TAPER FADE!!!--- GET OUT!!!---
-  # programs.hyprland.enable = true;
-  # programs.waybar.enable = true;
-  # services.displayManager.sddm = {
-  #   enable = true;
-  #   wayland.enable = true;
-  # }; # <- Enable SDDM for Hyprland and other miscellaneous Window Managers and KDE Plasma.
+  programs.hyprland.enable = true;
+  programs.waybar.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  }; # <- Enable SDDM for Hyprland and other miscellaneous Window Managers and KDE Plasma.
   # services.xserver.displayManager.gdm.enable = true; # <- Enable GDM for GNOME.
   # services.xserver.desktopManager.gnome.enable = true; # <- Enable the GNOME Desktop Environment.
   # environment.gnome.excludePackages = with pkgs; [
@@ -42,11 +42,9 @@
   #   seahorse
   #   epiphany
   # ]; # <- Define GNOME packages to not be installed because there are better alternatives.
-  services.displayManager = {
-    cosmic.enable = true;
-    cosmic-greeter.enable = true;
-  };
-  xdg.portal = {
+  # services.desktopManager.cosmic.enable = true; # <- Enable COSMIC desktop.
+  # services.displayManager.cosmic-greeter.enable = true; # <- Enable COSMIC greeter.
+    xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
     config.common.default = "gnome";
