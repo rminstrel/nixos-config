@@ -18,8 +18,12 @@
     zsh-autocomplete
     zsh-completions
   ]; # <- The home.packages option allows you to install Nix packages into your home environment.
-  # home.file = {
-  # }; # <- Define symlinks to dotfiles and the contents of the dotfiles.
+  home.file = {
+    # ".config/hypr/hyprpaper.conf".text = ''
+    # preload = /home/rminstrel/Pictures/wallpapers/mountain_view.jpg
+    # wallpaper = monitor, /home/rminstrel/Pictures/wallpapers/mountain_view.jpg
+    # '';
+  }; # <- Define symlinks to dotfiles and the contents of the dotfiles.
   programs.git = {
     enable = true;
     userName = "Alif Al Amin";
@@ -199,8 +203,7 @@
   }; # <- Define Environment Variables for user session. 
   qt = {
     enable = true;
-    style.name = "adwaita-dark";
-    platformTheme.name = "adwaita";
+    platformTheme.name = "qtct";
   }; # <- Configure Qt theming.
   gtk = {
     enable = true;
@@ -235,7 +238,7 @@
     };
   }; # <- Configure fontconfig.
   wayland.windowManager.hyprland = {
-    enable = true;
+    enable = false;
     systemd.enable = false;
     settings = {
       monitor = [ "eDP-1, preferred, auto, 1" ];
@@ -386,5 +389,19 @@
       ];
     };
   }; # <- Enable Hyprland and configure it using home-manager
+  services.hyprpaper = {
+    enable = false;
+    settings = {
+      ipc = "on";
+      splash = false;
+      splash_offset = 2.0;
+      preload = [ 
+        "/home/rminstrel/Pictures/wallpapers/mountain_view.jpg" 
+      ];
+      wallpaper = [
+        "eDP-1, /home/rminstrel/Pictures/wallpapers/mountain_view.jpg" 
+      ];
+    };
+  };
   programs.home-manager.enable = true; # <- Let Home Manager install and manage itself.
 }

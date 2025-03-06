@@ -5,7 +5,7 @@
   imports = [
     inputs.home-manager.nixosModules.default
   ];
-  programs.firefox.enable = true; # <- Install firefox.
+  programs.firefox.enable = false; # <- Install firefox.
   programs.nano.enable = false; # <- Remove nano because it sucks balls.
   programs.zsh.enable = true;
   home-manager = {
@@ -16,18 +16,23 @@
   }; # <- Install home-manager for declaring home configurations.
   nixpkgs.config.allowUnfree = true; # <- Allow unfree packages.
   environment.systemPackages = with pkgs; [
-    wofi
-    wlogout
+    # wofi
+    # wlogout
     # kitty
-    dunst
-    networkmanagerapplet
-    hyprshot
-    grim
-    slurp
-    xfce.thunar
-    hyprpaper
+    # dunst
+    # networkmanagerapplet
+    # hyprshot
+    # grim
+    # slurp
+    # xfce.thunar
+    # xfce.thunar-archive-plugin
+    # xfce.thunar-media-tags-plugin
+    # xfce.thunar-vcs-plugin
+    # xfce.thunar-volman
+    # hyprpaper
     libnotify
     brightnessctl
+    kdePackages.qtstyleplugin-kvantum
     wget
     curl
     git
@@ -42,8 +47,9 @@
     vlc
     rhythmbox
     kdePackages.okular
-    dconf-editor
-    gnome-tweaks
+    inputs.zen-browser.packages."${system}".default
+    # dconf-editor
+    # gnome-tweaks
     tilix
     pods
   ]; # <- List packages to be installed in system profile.

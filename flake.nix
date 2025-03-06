@@ -10,7 +10,8 @@
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
+    }; # <- Add COSMIC desktop flake.
+    zen-browser.url = "github:pfaj/zen-browser-flake"; # <- Add Zen browser flake.
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest"; # <- Add nix-flatpak to manage flatpaks declaratively
     # nur.url = "github:nix-community/nur"; # <- Community packages from NUR (Nix User Repository)
   };
