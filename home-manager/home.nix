@@ -19,10 +19,6 @@
     zsh-completions
   ]; # <- The home.packages option allows you to install Nix packages into your home environment.
   home.file = {
-    # ".config/hypr/hyprpaper.conf".text = ''
-    # preload = /home/rminstrel/Pictures/wallpapers/mountain_view.jpg
-    # wallpaper = monitor, /home/rminstrel/Pictures/wallpapers/mountain_view.jpg
-    # '';
   }; # <- Define symlinks to dotfiles and the contents of the dotfiles.
   programs.git = {
     enable = true;
@@ -53,10 +49,15 @@
       edit = "sudo -e ";
       update = "sudo nixos-rebuild switch";
     };
-    plugins = [ {name = "powerlevel10k"; src = pkgs.zsh-powerlevel10k;file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";} ];
+    plugins = [  ];
     initExtra = ''
-    source ~/.p10k.zsh
+    eval "$(oh-my-posh init zsh)"
     '';
+  };
+  programs.oh-my-posh = {
+    enable = true;
+    enableZshIntegration = true;
+    useTheme = "atomic";
   };
   programs.helix = {
     enable = true;
@@ -184,7 +185,6 @@
         "uptime"
         "packages"
         "shell"
-        "display"
         "terminal"
         "terminalfont"
         "cpu"
@@ -238,11 +238,11 @@
     };
   }; # <- Configure fontconfig.
   wayland.windowManager.hyprland = {
-    enable = false;
+    enable = true;
     systemd.enable = false;
     settings = {
       monitor = [ "eDP-1, preferred, auto, 1" ];
-      "$terminal" = "tilix";
+      "$terminal" = "kitty";
       "$fileManager" = "thunar";
       "$menu" = "wofi --show drun";
       exec-once = [
@@ -390,7 +390,7 @@
     };
   }; # <- Enable Hyprland and configure it using home-manager
   services.hyprpaper = {
-    enable = false;
+    enable = true;
     settings = {
       ipc = "on";
       splash = false;

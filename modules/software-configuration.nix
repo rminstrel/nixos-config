@@ -16,20 +16,20 @@
   }; # <- Install home-manager for declaring home configurations.
   nixpkgs.config.allowUnfree = true; # <- Allow unfree packages.
   environment.systemPackages = with pkgs; [
-    # wofi
-    # wlogout
-    # kitty
-    # dunst
-    # networkmanagerapplet
-    # hyprshot
-    # grim
-    # slurp
-    # xfce.thunar
-    # xfce.thunar-archive-plugin
-    # xfce.thunar-media-tags-plugin
-    # xfce.thunar-vcs-plugin
-    # xfce.thunar-volman
-    # hyprpaper
+    wofi
+    wlogout
+    kitty
+    dunst
+    networkmanagerapplet
+    hyprshot
+    grim
+    slurp
+    xfce.thunar
+    xfce.thunar-archive-plugin
+    xfce.thunar-media-tags-plugin
+    xfce.thunar-vcs-plugin
+    xfce.thunar-volman
+    hyprpaper
     libnotify
     brightnessctl
     kdePackages.qtstyleplugin-kvantum
@@ -50,7 +50,6 @@
     inputs.zen-browser.packages."${system}".default
     # dconf-editor
     # gnome-tweaks
-    tilix
-    pods
+    # tilix
   ]; # <- List packages to be installed in system profile.
 }

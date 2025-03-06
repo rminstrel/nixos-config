@@ -17,6 +17,7 @@
         kdePackages.kdenlive
         qbittorrent
         vscodium
+        pods
       ];
     }; # <- Define user "rminstrel". (me)
     fsmoni = {
