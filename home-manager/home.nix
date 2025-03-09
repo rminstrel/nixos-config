@@ -61,7 +61,7 @@
     useTheme = "atomic";
   };
   programs.helix = {
-    enable = false;
+    enable = true;
     settings = {
       editor = {
         line-number = "relative";
@@ -161,31 +161,11 @@
       wordwrap = true;
     };
   };
-  services.emacs = {
-    enable = true;
-    client.enable = true;
-    defaultEditor = true;
-    startWithUserSession = true;
-  }; # <- Enable and configure Emacs daemon.
-  programs.emacs = {
-      enable = true;
-	    # extraPackages = epkgs: [ epkgs.magit ];
-  	  extraConfig = ''
-(setq standard-indent 2)
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'eglot-format nil t)))
-
-(with-eval-after-load 'eglot
-  (dolist (mode '((nix-mode . ("nixd"))))
-    (add-to-list 'eglot-server-programs mode)))
-    '';
-  }; # <- Install and configure Emacs.
   programs.fastfetch = {
     enable = true;
     settings = {
       logo = {
-        source = "nixos-small";
+        source = "nixos-mini";
         padding = {
           right = 1;
         };
