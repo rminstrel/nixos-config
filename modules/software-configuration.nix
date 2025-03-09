@@ -5,7 +5,7 @@
   imports = [
     inputs.home-manager.nixosModules.default
   ];
-  programs.firefox.enable = false; # <- Install firefox.
+  # programs.firefox.enable = true; # <- Install firefox.
   programs.nano.enable = false; # <- Remove nano because it sucks balls.
   programs.zsh.enable = true;
   home-manager = {
@@ -19,7 +19,6 @@
     wofi
     wlogout
     kitty
-    dunst
     networkmanagerapplet
     hyprshot
     grim
@@ -32,7 +31,6 @@
     hyprpaper
     libnotify
     brightnessctl
-    kdePackages.qtstyleplugin-kvantum
     wget
     curl
     git

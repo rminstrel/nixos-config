@@ -52,6 +52,7 @@
     plugins = [  ];
     initExtra = ''
     eval "$(oh-my-posh init zsh)"
+    clear && fastfetch
     '';
   };
   programs.oh-my-posh = {
@@ -60,7 +61,7 @@
     useTheme = "atomic";
   };
   programs.helix = {
-    enable = true;
+    enable = false;
     settings = {
       editor = {
         line-number = "relative";
@@ -160,11 +161,31 @@
       wordwrap = true;
     };
   };
+  services.emacs = {
+    enable = true;
+    client.enable = true;
+    defaultEditor = true;
+    startWithUserSession = true;
+  }; # <- Enable and configure Emacs daemon.
+  programs.emacs = {
+      enable = true;
+	    # extraPackages = epkgs: [ epkgs.magit ];
+  	  extraConfig = ''
+(setq standard-indent 2)
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'eglot-format nil t)))
+
+(with-eval-after-load 'eglot
+  (dolist (mode '((nix-mode . ("nixd"))))
+    (add-to-list 'eglot-server-programs mode)))
+    '';
+  }; # <- Install and configure Emacs.
   programs.fastfetch = {
     enable = true;
     settings = {
       logo = {
-        source = "nixos";
+        source = "nixos-small";
         padding = {
           right = 1;
         };
@@ -177,33 +198,21 @@
         separator = "  ";
       };
       modules = [
-        "title"
-        "separator"
         "os"
         "host"
         "kernel"
         "uptime"
-        "packages"
         "shell"
         "terminal"
-        "terminalfont"
-        "cpu"
-        "gpu"
-        "memory"
-        "swap"
-        "disk"
-        "break"
-        "colors"
       ];
     };
   };
-  
   home.sessionVariables = {
-    EDITOR = "micro";
   }; # <- Define Environment Variables for user session. 
   qt = {
     enable = true;
     platformTheme.name = "qtct";
+    style.name = "kvantum";
   }; # <- Configure Qt theming.
   gtk = {
     enable = true;
@@ -246,16 +255,16 @@
       "$fileManager" = "thunar";
       "$menu" = "wofi --show drun";
       exec-once = [
-        "waybar & nm-applet & hyprpaper & dunst"
+        "waybar & nm-applet & hyprpaper & swaync"
       ];
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,24"
       ];
       general = {
-        gaps_in = 0;
-        gaps_out = 0;
-        border_size = 4;
+        gaps_in = 4;
+        gaps_out = 4;
+        border_size = 2;
         "col.active_border" = "rgba(4385beff) rgba(3aa99fee) 45deg";
         "col.inactive_border" = "rgba(205ea6aa) rgba(24837b99) 45deg";
         resize_on_border = false;
@@ -263,9 +272,9 @@
         layout = "dwindle";
       };
       decoration = {
-        rounding = 0;
-        active_opacity = 0.875;
-        inactive_opacity = 0.8;
+        rounding = 2;
+        active_opacity = 0.85;
+        inactive_opacity = 0.75;
         shadow = {
           enabled = true;
           range = 5;
@@ -401,6 +410,26 @@
       wallpaper = [
         "eDP-1, /home/rminstrel/Pictures/wallpapers/mountain_view.jpg" 
       ];
+    };
+  };
+  services.swaync = {
+    enable = true;
+    settings = {
+      positionX = "center";
+      positionY = "top";
+      layer = "overlay";
+      control-center-layer = "top";
+      layer-shell = true;
+      cssPriority = "application";
+      control-center-margin-top = 0;
+      control-center-margin-bottom = 0;
+      control-center-margin-right = 0;
+      control-center-margin-left = 0;
+      notification-2fa-action = true;
+      notification-inline-replies = false;
+      notification-icon-size = 64;
+      notification-body-image-height = 100;
+      notification-body-image-width = 200;
     };
   };
   programs.home-manager.enable = true; # <- Let Home Manager install and manage itself.

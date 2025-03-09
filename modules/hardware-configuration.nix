@@ -28,7 +28,7 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs; [ intel-media-driver intel-compute-runtime vulkan-tools aha pciutils wayland-utils glxinfo egl-wayland ];
+    extraPackages = with pkgs; [ intel-media-driver intel-media-sdk intel-compute-runtime vulkan-tools pciutils wayland-utils glxinfo egl-wayland ];
     # extraPackages32 = with pkgs; [ intel-media-driver intel-compute-runtime vulkan-tools aha pciutils wayland-utils glxinfo egl-wayland ];
   }; # <- OpenGL shenanigans.
   fileSystems = {
@@ -58,8 +58,12 @@
   ]; # <- Enable swap
   networking.hostName = "hp-15s-du1015tu"; # <- Define your hostname.
   networking.useDHCP = lib.mkDefault true; # <- Enables DHCP on each ethernet and wireless interface.
-  networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
+  networking.interfaces.wlo1.useDHCP = lib.mkDefault true; # <- Enables DHCP specifically on wlo1.
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux"; # <- Define the host platform.
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware; # <- Enable Firmware.
+  powerManagement = { 
+    enable = true;
+    cpuFreqGovernor = "performance"; 
+  }; # <- Configure Power management.
 }
