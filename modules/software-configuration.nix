@@ -33,17 +33,18 @@
     brightnessctl
     wget
     curl
+    htop
     git
     nixd
     links2
     wl-clipboard
     wineWowPackages.waylandFull
     winetricks
+    fahclient
     steam-run
     kanata-with-cmd
     shotwell
     vlc
-    rhythmbox
     kdePackages.okular
     inputs.zen-browser.packages."${system}".default
     # dconf-editor

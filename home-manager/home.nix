@@ -165,7 +165,7 @@
     enable = true;
     settings = {
       logo = {
-        source = "nixos-mini";
+        source = "nixos_small";
         padding = {
           right = 1;
         };
@@ -183,10 +183,10 @@
         "kernel"
         "uptime"
         "shell"
-        "terminal"
+        "colors"
       ];
     };
-  };
+  }; # <- Configure fastfetch.
   home.sessionVariables = {
   }; # <- Define Environment Variables for user session. 
   qt = {
@@ -208,7 +208,7 @@
   }; # <- Configure GTK theming.
   dconf.settings = {
     "org/gnome/desktop/interface" = {
-      monospace-font-name = "JetBrainsMono Nerd Font 12";
+      monospace-font-name = "BlexMono Nerd Font 12";
       document-font-name = "Liberation Serif 12";
       font-name = "Adwaita Sans 11";
     }; # <- Configure GNOME fonts using dconf.
@@ -221,7 +221,7 @@
     enable = true;
     defaultFonts = {
       emoji = [ "Noto Color Emoji" ];
-      monospace = [ "JetBrainsMono Nerd Font" ];
+      monospace = [ "BlexMono Nerd Font" ];
       sansSerif = [ "Adwaita Sans" ];
       serif = [ "Liberation Serif" ];
     };
@@ -242,9 +242,9 @@
         "HYPRCURSOR_SIZE,24"
       ];
       general = {
-        gaps_in = 4;
-        gaps_out = 4;
-        border_size = 2;
+        gaps_in = 0;
+        gaps_out = 0;
+        border_size = 0;
         "col.active_border" = "rgba(4385beff) rgba(3aa99fee) 45deg";
         "col.inactive_border" = "rgba(205ea6aa) rgba(24837b99) 45deg";
         resize_on_border = false;
@@ -252,7 +252,7 @@
         layout = "dwindle";
       };
       decoration = {
-        rounding = 2;
+        rounding = 0;
         active_opacity = 0.85;
         inactive_opacity = 0.75;
         shadow = {

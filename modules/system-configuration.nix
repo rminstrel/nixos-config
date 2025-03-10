@@ -58,7 +58,8 @@
     enable = true;
     user = "rminstrel";
     team = 236565;
-    daemonNiceLevel = -20;
+    daemonNiceLevel = 0;
+    extraArgs = ["--cpus=2"];
   }; # <- Enable and configure folding@home because I'm feeling charitable today :)
   systemd.services.hp-keycodes = {
     description = "HP setkeycodes fix";
